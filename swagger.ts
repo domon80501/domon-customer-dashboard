@@ -8,11 +8,13 @@ const endpointsFiles = ['./app.ts']; // 要指向的 API，通常使用 Express 
 
 const doc = {
   info: {
-    version: '1.0.0', // by default: "1.0.0"
-    title: 'Customer Dashboard', // by default: "REST API"
-    description: '客戶儀表板', // by default: ""
+    version: '1.0.0',
+    title: 'Customer Dashboard',
+    description:
+      '**客戶儀表板** (使用 api 請選擇正確的 http/https 協定避免 CORS)',
   },
   host: process.env.SWAGGER_DOMAIN_URL,
+  schemes: ['http', 'https'],
 };
 
 swaggerAutogen(outputFile, endpointsFiles, doc);

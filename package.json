@@ -19,7 +19,7 @@
     "pretest": "npm.cmd run compile",
     "posttest": "npm.cmd run lint",
     "swagger-autogen": "node ./swagger.ts",
-    "dev": "tsc && node build/app.js",
+    "dev": "node ./swagger.ts && tsc && node build/app.js",
     "postinstall": "tsc",
     "start": "node build/app.js"
   },

@@ -11,7 +11,7 @@ const doc = {
     version: '1.0.0',
     title: 'Customer Dashboard',
     description:
-      '**客戶儀表板** (使用 api 請選擇正確的 http/https 協定避免 CORS)',
+      '**客戶儀表板** 系統採用 +0 時區 (使用 api 請選擇正確的 http/https 協定避免 CORS)',
   },
   host: process.env.SWAGGER_DOMAIN_URL,
   schemes: ['http', 'https'],

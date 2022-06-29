@@ -1,0 +1,35 @@
+<div>
+    <div class="modal fade" id="changeNameModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">修改名稱</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingInputName" placeholder="name">
+                        <label for="floatingInputName">新名稱</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" onclick="changeName()">確定</button>
+                </div>
+                <script>
+                    async function changeName() {
+                        const name = document.getElementById("floatingInputName").value;
+                        const body = { name: name };
+
+                        const res = await fetch(`<%= process.env.DOMAIN_URL %>/customer/changeName`, { method: 'POST', body: JSON.stringify(body), headers: { 'Content-Type': 'application/json' } });
+                        const data = await res.json();
+                        const dataModel = JSON.parse(data);
+                        
+                        alert(dataModel.result);
+                        location.href = "/";
+                    }
+                </script>
+            </div>
+        </div>
+    </div>
+</div>

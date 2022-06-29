@@ -1,0 +1,63 @@
+<nav class="navbar fixed-top" style="background-color:steelblue">
+    <div class="container-fluid">
+        <a class="navbar-brand" style="color:white;" href="#">Customer Dashboard</a>
+        <div class="top_dashboard">
+            <span>
+                已註冊客戶總數:
+                <span id="total_cust" class="badge text-bg-danger"></span>
+            </span>
+            <span>
+                今日活躍客戶總數:
+                <span id="total_current" class="badge text-bg-danger"></span>
+            </span>
+            <span>
+                7天內活躍用戶總數:
+                <span id="rolling" class="badge text-bg-danger"></span>
+            </span>
+            <script>
+                window.onload = async function () { 
+                    const res = await fetch(`<%= process.env.DOMAIN_URL %>/getGloblaInfo`);
+                    const data = await res.json();
+                    
+                    document.getElementById('total_cust').textContent = data.total.tempdata;
+                    document.getElementById('total_current').textContent = data.current.tempdata;
+                    document.getElementById('rolling').textContent = data.rolling.tempdata;
+
+                }
+            </script>
+        </div>
+        <button style="background-color:white;" class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Hi , <%= customer.name %>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
+                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                    data-bs-target="#changeNameModal">修改名稱</a></li>
+
+                            <% if(customer.socialType==='individual' ) { %>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                        data-bs-target="#changePwdModal">更改密碼 </a></li>
+                                <% }%>
+                        </ul>
+                    </li>
+                    <li><a class="nav-link" href="/customer/logout">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>

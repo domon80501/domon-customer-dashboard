@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head'); %>
+        <style>
+            .container-mail {
+                position: absolute;
+                top: 10vh;
+                left: 40vw;
+            }
+
+            a {
+                cursor: pointer;
+            }
+
+            .main-container {
+                padding-top: 10vh;
+            }
+
+            .customer-img {
+                width: 12vw;
+                padding: 0.5em;
+                margin: 0 auto;
+            }
+
+            .customer-img img {
+                width: 10vw;
+                border-radius: 15px;
+                padding: 0.5em;
+                box-shadow: 0 0 10px 1px black;
+            }
+
+            .customer-info {
+                text-align: left;
+                padding: 1.5em;
+                margin: 0 auto;
+            }
+        </style>
+
+        <script>
+            async function sendEmail() {
+                email = '<%= customer.email %>';
+
+                let res = await fetch(`<%= process.env.DOMAIN_URL %>/customer/sendEmail/${email}`);
+
+                alert(await res.text());
+            }
+        </script>
+</head>
+
+<body>
+    <main>
+        <div class="container-mail">
+            <div class="customer-img">
+                <img src=<%=customer.picture %> class="card-img-bottom" >
+            </div>
+            <div class="customer-info">
+                <ul>
+                    <li>
+                        電子郵件:<%= customer.email %>
+                    </li>
+                    <li>
+                        姓名: <%= customer.name %>
+                    </li>
+                </ul>
+
+                <div style="text-align:center;">
+                    <a class="btn btn-danger btn-ms" href="/logout">登出</a>
+                    <a class="btn btn-primary btn-ms" onclick="sendEmail()">發送驗證信</a>
+                    <hr />
+                    <div class="alert alert-danger" role="alert">
+                        <span>請先進行 Email 驗證後才可繼續使用</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+
+    </footer>
+
+</body>
+
+</html>

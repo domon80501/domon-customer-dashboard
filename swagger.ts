@@ -12,7 +12,7 @@ const doc = {
     title: 'Customer Dashboard', // by default: "REST API"
     description: '客戶儀表板', // by default: ""
   },
-  host: process.env.DOMAIN_URL,
+  host: process.env.SWAGGER_DOMAIN_URL,
 };
 
 swaggerAutogen(outputFile, endpointsFiles, doc);
